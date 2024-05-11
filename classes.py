@@ -1,5 +1,4 @@
 import multiprocessing as mpr
-import os
 import re
 import string
 from copy import copy

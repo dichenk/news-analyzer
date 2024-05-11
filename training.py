@@ -36,7 +36,7 @@ sentences = []  # список для хранения предложений
 
 '''
 Создаем список sentences,
-содержащий все предложения из dataset, 
+содержащий все предложения из dataset,
 преобразованные в список токенов.
 '''
 for article in tqdm(dataset, desc=f"{'Getting sentences'}"):
