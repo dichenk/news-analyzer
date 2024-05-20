@@ -1,0 +1,39 @@
+import pandas as pd
+import json
+import glob
+
+# Путь к директории с JSON файлами
+directory_path = 'news_parsing/'
+
+# Получение списка всех JSON файлов в директории
+file_paths = glob.glob(f"{directory_path}/*.json")
+
+# Подготовка списка с данными для DataFrame
+prepared_data = []
+
+# Чтение и парсинг данных из всех JSON файлов
+for file_path in file_paths:
+    with open(file_path, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+    
+    for item in data:
+        link = item[0]
+        title = item[1]
+        content = item[2]
+        topics = item[3]
+        iso_date = item[4]
+        text_date = item[5]
+        
+        # Разбиение ISO даты на компоненты для форматирования
+        year, month, day = iso_date.split('T')[0].split('-')
+        formatted_date = f"{day}/{month}/{year}"  # Изменён формат даты на DD/MM/YYYY
+
+        prepared_data.append([link, title, content, topics, year, month, formatted_date, text_date])
+
+# Создание DataFrame
+df = pd.DataFrame(prepared_data, columns=["Ссылка", "Заголовок", "Содержимое", "Темы", "Год", "Месяц", "Дата (формат: DD/MM/YYYY)", "Текстовая дата"])
+
+# Сохранение DataFrame в Excel
+df.to_excel("news_data.xlsx", index=False)
+
+print("Данные успешно сохранены в news_data.xlsx")
