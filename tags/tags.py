@@ -7,7 +7,7 @@ def get_tags():
     :return: список списков, содержащий теги для каждого столбца
     tags.csv составлен из тегов файла Анализ стратегий конкурентов.xlsx
     '''
-    file_path = 'tags.csv'
+    file_path = 'tags/tags.csv'
 
     # Инициализация списков для каждого столбца
     columns = [[] for _ in range(21)]
